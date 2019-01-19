@@ -8,12 +8,11 @@ var config = { childList: true, subtree: true, characterData: true, attributes: 
 // Callback function to execute when mutations are observed
 var callback = function(mutationsList, observer) {
     for (var mutation of mutationsList) {
-        if (mutation.type == "characterData") {
-            console.log(mutation.oldValue);
-
+       if (mutation.type == "characterData" || mutation.type == "childList") {
+            console.log("sending logs to background");
             getUnreadChats();
+            chrome.runtime.sendMessage({request: logs});
 
-            chrome.runtime.sendMessage("test");
         }
     }
 };
@@ -96,6 +95,7 @@ function getUnreadChats() {
                         var count = parseInt(icons[j].childNodes[0].innerText);
                         var title = getElement("chat_title", chats[i]).title + '';
                         var msg = (getElement("chat_lastmsg", chats[i]) || {innerText: ''}).innerText.trim();
+
 
                         if (!(title in logs)) {
                             logs[title] = [];
