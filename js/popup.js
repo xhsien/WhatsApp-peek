@@ -34,7 +34,7 @@ function genHeader(id, title) {
 function genChat(id, chats) {
 	var content = "";
 	for (var chat in chats) {
-		content = content + chats[chat] + '\n';
+		content = content + chats[chat] + '<br/>';
 	}
 	return '        <div id="collapse' + id + '" class="collapse" aria-labelledby="heading' + id + '" data-parent="#accordionExample">\
           <div class="card-body">' + content + '\

@@ -8,7 +8,7 @@ var config = { childList: true, subtree: true, characterData: true, attributes: 
 // Callback function to execute when mutations are observed
 var callback = function(mutationsList, observer) {
     for (var mutation of mutationsList) {
-       if (mutation.type == "characterData" || mutation.type == "childList") {
+       if (mutation.type == "characterData") {
             console.log("sending logs to background");
             getUnreadChats();
             chrome.runtime.sendMessage({request: logs});
